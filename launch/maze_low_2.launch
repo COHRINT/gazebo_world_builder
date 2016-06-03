@@ -1,0 +1,65 @@
+
+<launch>
+
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+  
+    <!-- <arg name="world_name" value="$(find ramrod)/worlds/testImage.world"/>  -->
+    <!-- Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable -->
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="false"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+ <include file="maze_spawn.gazebo.launch">
+     <arg name="maze_name" value="maze_low"/>
+     <arg name="maze_position" value="-x 31.000000 -y 0.000000 -z 0.01 -R 0 -P 0 -Y 1.57" />
+  </include >
+<node name="map_server" pkg="hri_map_server" type="map_server" args="$(find ramrod)/launch/maze_low.yaml" />
+<include file="$(find basic_move_base)/launch/basic_move.launch"/>
+<include file="$(find gazebo_plugins)/test/multi_robot_scenario/launch/pioneer3dx.gazebo.launch">
+     <arg name="robot_name" value="r0" />
+     <arg name="robot_position" value="-x 10.0 -y 6.0 -z 0.01 -R 0 -P 0 -Y +1.57" />
+   </include>
+<include file="$(find gazebo_plugins)/test/multi_robot_scenario/launch/pioneer3dx.gazebo.launch">
+     <arg name="robot_name" value="r1" />
+     <arg name="robot_position" value="-x 16.0 -y 7.0 -z 0.01 -R 0 -P 0 -Y +1.57" />
+   </include>
+ <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="youbot" />
+     <arg name="model_position" value="-x 4.0 -y 15.0 -z 0.01 -R 0 -P 0 -Y -1.57" />
+  </include >
+ <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="husky" />
+     <arg name="model_position" value="-x 27.0 -y 11.0 -z 0.01 -R 0 -P 0 -Y -1.57" />
+  </include >
+ <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="construction_cone" />
+     <arg name="model_position" value="-x 22.0 -y 4.0 -z 0.01 -R 0 -P 0 -Y -1.57" />
+  </include >
+ <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="coke_can" />
+     <arg name="model_position" value="-x 21.0 -y 15.0 -z 0.01 -R 0 -P 0 -Y -1.57" />
+  </include >
+ <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="grey_tote" />
+     <arg name="model_position" value="-x 15.0 -y 17.0 -z 0.01 -R 0 -P 0 -Y -1.57" />
+  </include >
+ <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="drc_practice_blue_cylinder" />
+     <arg name="model_position" value="-x 4.0 -y 28.0 -z 0.01 -R 0 -P 0 -Y -1.57" />
+  </include >
+ <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="table" />
+     <arg name="model_position" value="-x 28.0 -y 23.0 -z 0.01 -R 0 -P 0 -Y -1.57" />
+  </include >
+ <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="beer" />
+     <arg name="model_position" value="-x 28.0 -y 29.0 -z 0.01 -R 0 -P 0 -Y -1.57" />
+  </include >
+ <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="create" />
+     <arg name="model_position" value="-x 16.0 -y 28.0 -z 0.01 -R 0 -P 0 -Y -1.57" />
+  </include >
+</launch>

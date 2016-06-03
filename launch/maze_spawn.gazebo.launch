@@ -1,0 +1,10 @@
+<launch>
+  <arg name="maze_name" default="maze_low" />
+  <arg name="maze_position" default="-x 21.0 -y 0.0 -z 0.01 -Y 1.57" />
+
+
+    <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+    <node name="maze_spawner_$(arg maze_name)" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+    args="-sdf -file $(env PWD)/../models/$(arg maze_name).sdf -model $(arg maze_name) $(arg maze_position)"/>
+
+</launch>
