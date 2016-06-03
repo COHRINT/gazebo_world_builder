@@ -2,18 +2,7 @@
 import numpy
 from numpy.random import random_integers as rand
 import matplotlib.pyplot as pyplot
-
-def writePBM(src):
-    outFile = open("maze.pbm", 'w')
-    outFile.write("P1\n")
-    outFile.write(str(src.shape[0]) + ' ' + str(src.shape[1]) + '\n')
-    for i in range(0, src.shape[0]):
-        for j in range(0, src.shape[1]):
-            outFile.write(str(int(src[i,j])) + ' ')
-        outFile.write('\n')
-
-    outFile.close()
-    return
+from toPBM import writePBM
 
 def maze(width=81, height=51, complexity=.8, density=.1):
     # Only odd shapes
