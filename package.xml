@@ -1,16 +1,17 @@
 <?xml version="1.0"?>
 <package>
-  <name>ramrod</name>
+  <name>gazebo_world_builder</name>
   <version>0.0.1</version>
   <description>
-    HCI CSCi 7k resources
+    COHRINT, Gazebo world generator
   </description>
 
-  <maintainer email="stephen.mcguire@colorado.edu">Steve McGuire</maintainer>
+  <maintainer email="brett.israelsen@colorado.edu">Brett Israelsen</maintainer>
+  <maintainer email="sierra.williams@colorado.edu">Sierra Williams</maintainer>
 
   <license>Apache 2.0</license>
 
-  <author>Steve McGuire</author>
+  <author>Brett Israelsen</author>
 
   <buildtool_depend>catkin</buildtool_depend>
 
