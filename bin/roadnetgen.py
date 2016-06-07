@@ -24,17 +24,21 @@ def roadNetGen(roadnet):
 
     # assume that the first and third elements are vertical
     # constrain dimensions by the max height and max width
-    height = 2* max(edg[2],edg[0]) + 1
-    width = 2* max(edg[3],edg[1]) + 1
+    sze = 2*max(edg)+1
+    #height = 2* max(edg[2],edg[0]) + 1
+    #width = 2* max(edg[3],edg[1]) + 1
 
     # Build actual maze
-    Z = numpy.ones((height,width), dtype=bool)
+    #Z = numpy.ones((height,width), dtype=bool)
+    Z = numpy.ones((sze,sze),dtype=bool)
     # Fill borders
     Z[0, :] = Z[-1, :] = 1
     Z[:, 0] = Z[:, -1] = 1
 
-    Z[height/2-edg[2]:height/2+edg[0],width/2]=0
-    Z[height/2, width/2-edg[3]:width/2+edg[1]]=0
+    #Z[height/2-edg[2]:height/2+edg[0],width/2]=0
+    #Z[height/2, width/2-edg[3]:width/2+edg[1]]=0
+    Z[sze/2-edg[2]:sze/2+edg[0],sze/2]=0
+    Z[sze/2,sze/2-edg[3]:sze/2+edg[1]]=0
 
     return Z
 
