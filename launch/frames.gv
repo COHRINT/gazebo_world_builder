@@ -1,0 +1,12 @@
+digraph G {
+"sim_p3at/odom" -> "sim_p3at/base_footprint"[label="Broadcaster: /odomToBase_footprint\nAverage rate: 118.866 Hz\nMost recent transform: 91.514 ( -0.003 sec old)\nBuffer length: 4.972 sec\n"];
+"map" -> "sim_p3at/odom"[label="Broadcaster: /mapToOdom\nAverage rate: 99.215 Hz\nMost recent transform: 91.512 ( -0.001 sec old)\nBuffer length: 4.969 sec\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 91.511"[ shape=plaintext ] ;
+ }->"map";
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 91.511"[ shape=plaintext ] ;
+ }->"odom";
+}

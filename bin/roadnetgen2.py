@@ -1,6 +1,5 @@
 #!/usr/bin/python2
 import numpy
-from numpy.random import random_integers as rand
 import matplotlib.pyplot as pyplot
 import networkx as nx
 from toPBM import writePBM
@@ -24,8 +23,8 @@ def roadNetGen(roadnet):
 
     # assume that the first and third elements are vertical
     # constrain dimensions by the max height and max width
-    height = 2* max(edg[2],edg[0]) + 1
-    width = 2* max(edg[3],edg[1]) + 1
+    height = 2* (max(edg[2],edg[0]) + 1)
+    width = 2* (max(edg[3],edg[1]) + 1)
 
     # Build actual maze
     Z = numpy.ones((height,width), dtype=bool)
@@ -40,18 +39,15 @@ def roadNetGen(roadnet):
 
 # Build a road network
 RN = nx.Graph()
-RN.add_edge(0,1,weight=3)
-RN.add_edge(0,2,weight=2)
+RN.add_edge(0,1,weight=5)
+RN.add_edge(0,2,weight=5)
 RN.add_edge(0,3,weight=5)
-RN.add_edge(0,4,weight=3)
+RN.add_edge(0,4,weight=5)
 
 # Generate the occupancy grid
-roadnet_mat = roadNetGen(RN)
 
 pyplot.figure(figsize=(10, 5))
-# pyplot.imshow(maze(80, 40), cmap=pyplot.cm.binary, interpolation='nearest')
-# genMaze = maze(31,31, complexity=0.1, density=0.15)
-
+roadnet_mat = roadNetGen(RN)
 writePBM(roadnet_mat)
 
 pyplot.imshow(roadnet_mat, cmap=pyplot.cm.binary, interpolation='nearest')

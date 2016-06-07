@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(ramrod)
+project(gazebo_world_builder)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -std=c++11 -Wall -Wextra")
 find_package(catkin REQUIRED COMPONENTS
   std_msgs
