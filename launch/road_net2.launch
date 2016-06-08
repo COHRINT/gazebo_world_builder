@@ -1,13 +1,13 @@
 
 <launch>
 
-  <!-- Transform Between Map and odom -->    
+  <!-- Transform Between Map and odom-->     
   <node pkg="tf" type="static_transform_publisher" 
-      name="mapToOdom" args="0 0 0 0 0 0 /map /odom 20"/>
+      name="mapToOdom" args="0 0 0 0 0 0 /map /odom 5"/>
 
-  <!-- Transform Between odom to base_footprint-->
+  <!-- Transform Between odom to base_footprint
   <node pkg="tf" type="static_transform_publisher" 
-        name="OdomToBase_footprint" args="0 0 0 0 0 0 /odom /base_footprint 20"/>
+        name="OdomToBase_footprint" args="0 0 0 0 0 0 /odom /base_footprint 5"/>-->
 
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -22,8 +22,6 @@
      <arg name="maze_name" value="road_net2"/>
      <arg name="maze_position" value="-x 0 -y 0 -z 0.01 -R 0 -P 0 -Y 0" />
   </include >
-
-<!--<node name="map_server" pkg="map_server" type="map_server" args="/home/sierra/catkin_ws/src/navigation/map_server/road_net2.yaml" />-->
 
 <node name="map_server" pkg="hri_map_server" type="map_server" args="$(find gazebo_world_builder)/launch/road_net2.yaml" />
 
