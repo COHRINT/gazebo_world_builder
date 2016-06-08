@@ -5,6 +5,7 @@ import matplotlib.pyplot as pyplot
 import networkx as nx
 from toPBM import writePBM
 
+
 def roadNetGen(roadnet):
     # TODO: This is pretty hacked together. Make this better
     try:
@@ -24,6 +25,7 @@ def roadNetGen(roadnet):
 
     # assume that the first and third elements are vertical
     # constrain dimensions by the max height and max width
+    edg = 2*edg # make edges twice as long, so we can scale up the resolution
     sze = 2*max(edg)+1
     #height = 2* max(edg[2],edg[0]) + 1
     #width = 2* max(edg[3],edg[1]) + 1
@@ -32,22 +34,22 @@ def roadNetGen(roadnet):
     #Z = numpy.ones((height,width), dtype=bool)
     Z = numpy.ones((sze,sze),dtype=bool)
     # Fill borders
-    Z[0, :] = Z[-1, :] = 1
-    Z[:, 0] = Z[:, -1] = 1
+    # Z[0, :] = Z[-1, :] = 1
+    # Z[:, 0] = Z[:, -1] = 1
 
     #Z[height/2-edg[2]:height/2+edg[0],width/2]=0
     #Z[height/2, width/2-edg[3]:width/2+edg[1]]=0
-    Z[sze/2-edg[2]:sze/2+edg[0],sze/2]=0
-    Z[sze/2,sze/2-edg[3]:sze/2+edg[1]]=0
+    Z[sze/2-edg[2]:sze/2+edg[0],sze/2:sze/2+1]=0
+    Z[sze/2:sze/2+1 , sze/2-edg[3]:sze/2+edg[1]]  = 0
 
     return Z
 
 # Build a road network
 RN = nx.Graph()
-RN.add_edge(0,1,weight=3)
-RN.add_edge(0,2,weight=2)
-RN.add_edge(0,3,weight=5)
-RN.add_edge(0,4,weight=3)
+RN.add_edge(0, 1, weight=3)
+RN.add_edge(0, 2, weight=2)
+RN.add_edge(0, 3, weight=5)
+RN.add_edge(0, 4, weight=3)
 
 # Generate the occupancy grid
 roadnet_mat = roadNetGen(RN)
