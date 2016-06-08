@@ -7,5 +7,6 @@
     <rosparam file="local_costmap_params.yaml" command="load" />
     <rosparam file="global_costmap_params.yaml" command="load" />
     <rosparam file="base_local_planner_params.yaml" command="load" />
+    <param name="controller_frequency" value="10.0"/>
   </node>
 </launch>
