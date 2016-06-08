@@ -39,8 +39,9 @@ def roadNetGen(roadnet):
 
     #Z[height/2-edg[2]:height/2+edg[0],width/2]=0
     #Z[height/2, width/2-edg[3]:width/2+edg[1]]=0
-    Z[sze/2-edg[2]:sze/2+edg[0],sze/2:sze/2+1]=0
-    Z[sze/2:sze/2+1 , sze/2-edg[3]:sze/2+edg[1]]  = 0
+    print(sze/2,sze/2+1)
+    Z[sze/2-edg[2]:sze/2+edg[0],sze/2:sze/2+2]=0
+    Z[sze/2:sze/2+2 , sze/2-edg[3]:sze/2+edg[1]]  = 0
 
     return Z
 
@@ -58,7 +59,7 @@ pyplot.figure(figsize=(10, 5))
 # pyplot.imshow(maze(80, 40), cmap=pyplot.cm.binary, interpolation='nearest')
 # genMaze = maze(31,31, complexity=0.1, density=0.15)
 
-writePBM(roadnet_mat)
+writePBM(roadnet_mat,name="roadnet")
 
 pyplot.imshow(roadnet_mat, cmap=pyplot.cm.binary, interpolation='nearest')
 pyplot.xticks([]), pyplot.yticks([])
