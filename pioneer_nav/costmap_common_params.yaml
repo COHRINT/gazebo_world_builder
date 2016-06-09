@@ -4,9 +4,9 @@ raytrace_range: 3.0
 #footprint: [[6.2095, 1.32inflation_radius: 0.25], [6.2095, 1.72], [6.7105, 1.72], [6.7105, 1.32]]
 robot_radius: .25
 
-inflation_layer:
-enabled: true
-cost_scaling_factor: 5
+#inflation_layer:
+#enabled: true
+#cost_scaling_factor: 5
 inflation_radius: 0.25
 
 transform_tolerance: 5

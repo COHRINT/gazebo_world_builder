@@ -57,8 +57,12 @@ RN.add_edge(0, 4, weight=3)
 
 # Generate the occupancy grid
 
-roadnet_mat = roadNetGen(RN,sf=10)
-roadnet_mat_90 = numpy.rot90(roadnet_mat)
+# roadnet_mat = roadNetGen(RN,sf=10)
+# roadnet_mat_90 = numpy.rot90(roadnet_mat)
+
+roadnet_mat = roadNetGen(RN, sf=1)
+roadnet_mat_90 = numpy.rot90(roadNetGen(RN,sf=10))
+
 
 pyplot.figure(figsize=(10, 5))
 # pyplot.imshow(maze(80, 40), cmap=pyplot.cm.binary, interpolation='nearest')
