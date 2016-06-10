@@ -7,9 +7,10 @@
       <visual name="node_entire">
         <pose>0 0 0 0 0 0</pose>
         <geometry>
-          <box>
-            <size>1.9 1.9 0.001</size>
-          </box>
+          <cylinder>
+            <radius>1</radius>
+            <length>0.001</length>
+          </cylinder>
         </geometry>
         <material>
           <script>
