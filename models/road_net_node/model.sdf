@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <model name="road_net_node">
+    <static>true</static>
+    <link name="road_node">
+
+      <visual name="node_entire">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1.9 1.9 0.001</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://road_net_node/materials/scripts</uri>
+            <uri>model://road_net_node/materials/textures</uri>
+            <name>imaginary</name>
+          </script>
+        </material>
+      </visual>
+
+
+  </model>
+</sdf>
