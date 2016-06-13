@@ -2,7 +2,7 @@
 
 //LibPNG example code: http://zarb.org/~gc/html/libpng.html
 //
-/* 
+/*
    Goal:
    Read a PNG file
    Create a SDF model files corresponding to the PNG image, with a few parameters
@@ -119,7 +119,7 @@ void CreateBoxes(QuadNode *node, FILE* outFile, float height, float scale)
     float ySize = (node->height) * scale;
     float zSize = height;
     char baseName[16];
-    
+
     sprintf(baseName, "Wall_%1.1f_%1.1f", x,y);
 
     fprintf(outFile, "<collision name='%s_Collision'>\n\t<geometry>\n\t<box>\n", baseName);
@@ -143,13 +143,13 @@ void CreateBoxes(QuadNode *node, FILE* outFile, float height, float scale)
   }
 }
 
-void processMap(QuadNode *src)
+void processMap(QuadNode *src, float scale)
 {
   FILE* outFile = fopen("model.sdf","w");
   fprintf(outFile, "<?xml version='1.0'?>\n<sdf version='1.6'>\n<model name='ImageMaze'>\n");
   fprintf(outFile, "<pose frame=''>0 0 0 0 -0 0</pose>\n");
   fprintf(outFile, "<link name='WallLink'>\n");
-  CreateBoxes(src, outFile, 1.0, 1.0);
+  CreateBoxes(src, outFile, scale, scale);
   fprintf(outFile, " \n</link><static>1</static>\n</model>\n</sdf>\n");
   fclose(outFile);
 }
@@ -176,11 +176,11 @@ int main(int argc, char **argv)
   PBMMapImage mapImage;
   mapImage.LoadFromPBM(argv[1]);
   QuadTree *tree = MakeQuadTree(mapImage);
-  
-  processMap(tree->root);
-  
+
+  processMap(tree->root, 0.03);
+
   /*
-  uint8_t *data = mapImage.getPixelPlane(); 
+  uint8_t *data = mapImage.getPixelPlane();
   for (int i = 0; i<mapImage.getHeight(); i++)
     {
       for (int j = 0; j<mapImage.getWidth(); j++)
@@ -190,6 +190,6 @@ int main(int argc, char **argv)
       printf("\n");
     }
   */
-  
+
   return 0;
 }
