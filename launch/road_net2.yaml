@@ -1,5 +1,5 @@
 image: ../maps/roadnet2.pbm
-resolution: 1
+resolution: .1
 origin: [0.0, 0.0, 0.0]
 occupied_thresh: 0.5
 free_thresh: 0.5
