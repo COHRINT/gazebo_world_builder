@@ -1,0 +1,11 @@
+local_costmap:
+  global_frame: /intruder_odom
+  robot_base_frame: intruder_base_footprint
+  update_frequency: 2.0
+  publish_frequency: 2.0
+  static_map: true
+  rolling_window: false
+  width: 6.0
+  height: 6.0
+  resolution: 1.0
+  
