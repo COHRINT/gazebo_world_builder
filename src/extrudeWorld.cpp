@@ -142,13 +142,13 @@ void CreateBoxes(QuadNode *node, FILE* outFile, float height, float scale)
   }
 }
 
-void processMap(QuadNode *src, float scale)
+void processMap(QuadNode *src, float height, float scale)
 {
   FILE* outFile = fopen("model.sdf","w");
   fprintf(outFile, "<?xml version='1.0'?>\n<sdf version='1.6'>\n<model name='ImageMaze'>\n");
   fprintf(outFile, "<pose frame=''>0 0 0 0 -0 0</pose>\n");
   fprintf(outFile, "<link name='WallLink'>\n");
-  CreateBoxes(src, outFile, scale, scale);
+  CreateBoxes(src, outFile, height, scale);
   fprintf(outFile, " \n</link><static>1</static>\n</model>\n</sdf>\n");
   fclose(outFile);
 }
@@ -176,7 +176,7 @@ int main(int argc, char **argv)
   mapImage.LoadFromPBM(argv[1]);
   QuadTree *tree = MakeQuadTree(mapImage);
 
-  processMap(tree->root, 0.03);
+  processMap(tree->root, 1, 0.03);
 
   /*
   uint8_t *data = mapImage.getPixelPlane();
