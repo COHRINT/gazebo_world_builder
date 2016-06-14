@@ -1,8 +1,12 @@
+
 <launch>
 
   <!-- Transform Between Map and odom-->     
   <node pkg="tf" type="static_transform_publisher" 
-      name="mapToOdom" args="0 0 0 0 0 0 /map /odom 2"/>
+      name="mapToOdomHero" args="0 0 0 0 0 0 /map /hero/odom 2"/>
+  <!-- Transform Between Map and odom-->     
+  <node pkg="tf" type="static_transform_publisher" 
+      name="mapToOdomIntruder" args="0 0 0 0 0 0 /map intruder/odom 2"/>
 
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched.  Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -22,19 +26,27 @@
 
   <!-- Spawn models
   <include file="model_spawn.gazebo.launch">
-     <arg name="model_dbname" value="pioneer3at" />
+     <arg name="model_dbname" value="husky_good"/>
      <arg name="model_position" value="-x 1.99 -y 10.99 -z 0.17 -R 0 -P 0 -Y 0" />
   </include>
   <include file="model_spawn.gazebo.launch">
-     <arg name="model_dbname" value="road_net_node" />
+     <arg name="model_dbname" value="husky_intruder"/>
+     <arg name="model_position" value="-x 11.0 -y 5.0 -z 0.17 -R 0 -P 0 -Y 1.57" />
+  </include>
+  <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="road_net_node"/>
      <arg name="model_position" value="-x 11.0 -y 11.0 -z 0.0 -R 0 -P 0 -Y 0" />
   </include>
   <include file="model_spawn.gazebo.launch">
-     <arg name="model_dbname" value="road_net_sensor" />
+     <arg name="model_dbname" value="road_net_sensor"/>
      <arg name="model_position" value="-x 11.0 -y 11.0 -z 2.26 -R -0.43 -P 1.34 -Y 2.06" />
-  </include> -->
+  </include>
+   -->
 
-  <!-- Running other launch file -->
+  <!-- Running other launch files -->
+<!-- Matt says use two seperate <group ns="intruder or hero"/> instead of how this is now but will need to add the /map as a node on the bottom...I don't know how to do that-->
+  <include file="../pioneer_nav/move_base_intruder.launch"/>
+
   <include file="../pioneer_nav/move_base.launch"/>
 
 

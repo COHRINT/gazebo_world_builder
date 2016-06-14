@@ -84,7 +84,6 @@
 
 //////////////////////////////////////////////////
 
-
 void renderOnePixel(FILE* outFile, float height, uint16_t x, uint16_t y, float scale)
 {
   // Write a new Link XML item to the FILE* that represents a 1px by 1px wall
