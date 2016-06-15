@@ -176,7 +176,7 @@ int main(int argc, char **argv)
   mapImage.LoadFromPBM(argv[1]);
   QuadTree *tree = MakeQuadTree(mapImage);
 
-  processMap(tree->root, 1, 0.03);
+  processMap(tree->root, 1, 0.07);
 
   /*
   uint8_t *data = mapImage.getPixelPlane();
