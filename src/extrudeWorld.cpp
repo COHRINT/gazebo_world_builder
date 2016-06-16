@@ -174,9 +174,11 @@ int main(int argc, char **argv)
 {
   PBMMapImage mapImage;
   mapImage.LoadFromPBM(argv[1]);
+  float height = atof(argv[2]);
+  float scale = atof(argv[3]);
   QuadTree *tree = MakeQuadTree(mapImage);
 
-  processMap(tree->root, 1, 0.07);
+  processMap(tree->root, height, scale);
 
   /*
   uint8_t *data = mapImage.getPixelPlane();
