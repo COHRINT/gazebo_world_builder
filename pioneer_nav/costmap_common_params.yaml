@@ -7,7 +7,7 @@ robot_radius: .25
 #inflation_layer:
 #enabled: true
 #cost_scaling_factor: 5
-inflation_radius: 0.5
+inflation_radius: 1
 
 transform_tolerance: 5
 

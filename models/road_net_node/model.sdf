@@ -3,8 +3,16 @@
   <model name="road_net_node">
     <static>true</static>
     <link name="road_node">
-
-      <visual name="node_entire">
+      <collision name="node_entire_collision">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>1</radius>
+            <length>0.001</length>
+          </cylinder>
+        </geometry>
+      </collision> 
+      <visual name="node_entire_visual">
         <pose>0 0 0 0 0 0</pose>
         <geometry>
           <cylinder>
@@ -20,7 +28,19 @@
           </script>
         </material>
       </visual>
-
-
+      <sensor name="contact_sensor" type="contact">
+        <always_on>true</always_on>
+        <update_rate>0.1</update_rate>
+        <contact>
+          <collision>node_entire_collision</collision>
+        </contact>
+        <plugin name="node_gazebo_ros_bumper_controller" filename="libgazebo_ros_bumper.so">
+          <alwaysOn>true</alwaysOn>
+          <updateRate>0.1</updateRate>
+          <bumperTopicName>node_bumper</bumperTopicName>
+          <frameName>nodeSensor</frameName>
+        </plugin>
+      </sensor>
+    </link>
   </model>
 </sdf>
