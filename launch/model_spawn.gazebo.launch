@@ -1,10 +1,10 @@
 <launch>
   <arg name="model_dbname" default="coke_can" />
-  <arg name="model_name" default="$(arg model_dbname)" />
+  <arg name="model_name" default="road_net_node" />
   <arg name="model_position" default="-x 0.0 -y 0.0 -z 0.01" />
 
 
     <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
-    <node name="model_spawner_$(arg model_name)" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-sdf -database $(arg model_dbname) -model $(arg model_name) $(arg model_position)"/>
+    <node name="model_spawner_$(arg model_dbname)" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-sdf -database $(arg model_name) -model $(arg model_dbname) $(arg model_position)"/>
 
 </launch>
