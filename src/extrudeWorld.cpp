@@ -96,7 +96,7 @@ void renderOnePixel(FILE* outFile, float height, uint16_t x, uint16_t y, float s
   fprintf(outFile, "</collision>\n\t<visual name='%s_Visual'>\n<pose frame=''>%f %f 0 0 0 0</pose>\n", baseName, x*scale, y*scale);
   fprintf(outFile, "\t<geometry>\n<box>\n<size>%f %f %f</size>\n", scale, scale, height);
   fprintf(outFile, "</box>\n</geometry>\n<material>\n<script>\n<uri>file://media/materials/scripts/gazebo.material</uri>\n");
-  fprintf(outFile,"<name>Gazebo/Grey</name>\n</script>\n<ambient>1 1 1 1</ambient>\n</material>\n");
+  fprintf(outFile,"<name>Gazebo/Black</name>\n</script>\n<ambient>1 1 1 1</ambient>\n</material>\n");
   fprintf(outFile,"</visual>\n<pose frame=''>%f %f 0 0 -0 0</pose>\n", x*scale, y*scale);
 }
 
@@ -128,7 +128,7 @@ void CreateBoxes(QuadNode *node, FILE* outFile, float height, float scale)
 	    x, y, z);
     fprintf(outFile, "\t<geometry>\n<box>\n<size>%f %f %f</size>\n", xSize, ySize, zSize);
     fprintf(outFile, "</box>\n</geometry>\n<material>\n<script>\n<uri>file://media/materials/scripts/gazebo.material</uri>\n");
-    fprintf(outFile,"<name>Gazebo/Grey</name>\n</script>\n<ambient>1 1 1 1</ambient>\n</material>\n");
+    fprintf(outFile,"<name>Gazebo/Black</name>\n</script>\n<ambient>0 0 0 0</ambient>\n</material>\n");
     fprintf(outFile,"</visual>\n");
 
   }
@@ -174,8 +174,16 @@ int main(int argc, char **argv)
 {
   PBMMapImage mapImage;
   mapImage.LoadFromPBM(argv[1]);
-  float height = atof(argv[2]);
-  float scale = atof(argv[3]);
+  if (*argv[2] != NULL){
+  	float height = atof(argv[2]);
+  	float scale = atof(argv[3]);
+  }
+  else{
+  	float height = 1;
+	float scale = 1;
+	printf("Height=1:\n");
+
+  }
   QuadTree *tree = MakeQuadTree(mapImage);
 
   processMap(tree->root, height, scale);

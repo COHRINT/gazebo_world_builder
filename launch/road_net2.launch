@@ -17,88 +17,92 @@
     <arg name="debug" value="false"/>
   </include>
 
-  <include file="maze_spawn.gazebo.launch">
+  <!-- Use Models that builds walls -->
+  <!--<include file="maze_spawn.gazebo.launch">
      <arg name="maze_name" value="road_net2"/>
      <arg name="maze_position" value="-x 0 -y 0 -z 0.01 -R 0 -P 0 -Y 0" />
-  </include >
+  </include>-->
 
   <node name="map_server" pkg="hri_map_server" type="map_server" args="$(find gazebo_world_builder)/launch/road_net2.yaml" />
 
+  <!-- World without walls -->
+  <include file="road_spawn.gazebo.launch">
+    <arg name="road_net_dbname" value="road_net_visual"/>
+    <arg name="road_net_position" value="-x 27.65 -y 27.65 -z -0.01 -R 0 -P 0 -Y 0" />
+    <arg name="road_net_size" value="55.3 55.3 0.099" />
+  </include>
+
+
   <!-- Spawn models   -->
-  <!-- Robots  -->
+
   <include file="model_spawn.gazebo.launch">
      <arg name="model_dbname" value="husky_good"/>
-     <arg name="model_name" value="husky_good" />
-     <arg name="model_position" value="-x 13.9513 -y 3.4756 -z 0.1 -R 0 -P 0 -Y -0.2383" />
+     <arg name="model_position" value="-x 24.7753 -y 5.0471 -z 0.1 -R 0 -P 0 -Y -0.3844" />
   </include>
   <include file="model_spawn.gazebo.launch">
      <arg name="model_dbname" value="husky_intruder"/>
-     <arg name="model_name" value="husky_intruder" />
-     <arg name="model_position" value="-x 30.8837 -y 24.4508 -z 0.1 -R 0 -P 0 -Y 1.0142" />
+     <arg name="model_position" value="-x 39.5379 -y 33.0177 -z 0.1 -R 0 -P 0 -Y 0.6495" />
   </include>
 
   <!-- Node/Sensors  -->
-  <!--Need to change the name of the model some how or add a lot more models in gazebo  -->
+  <!--Need to change the name of the model some how or add a lot more models in gazebo -->    
   <include file="model_spawn.gazebo.launch">
-     <arg name="model_dbname" value="road_net_node"/>
-     <arg name="model_position" value="-x 3.7518 -y 5.6955 -z 0.0 -R 0 -P 0 -Y 0" />
-  </include>
-  <!--<include file="model_spawn.gazebo.launch">
-     <arg name="model_dbname" value="road_net_node_0"/>
-     <arg name="model_position" value="-x 1.4500 -y 22.7385 -z 0.0 -R 0 -P 0 -Y 0" />
+     <arg name="model_dbname" value="road_net_node_exit"/>
+     <arg name="model_position" value="-x 44.5778 -y 52.4534 -z 0.1 -R 0 -P 0 -Y 0" />
   </include>
   <include file="model_spawn.gazebo.launch">
-     <arg name="model_dbname" value="road_net_node_1"/>
-     <arg name="model_position" value="-x 7.2917 -y 38.7579 -z 0.0 -R 0 -P 0 -Y 0" />
+     <arg name="model_dbname" value="road_net_node_sensor"/>
+     <arg name="model_position" value="-x 31.3415 -y 47.4779 -z 0.1 -R 0 -P 0 -Y 0" />
   </include>
   <include file="model_spawn.gazebo.launch">
-     <arg name="model_dbname" value="road_net_node_2"/>
-     <arg name="model_position" value="-x 13.7067 -y 14.4465 -z 0.0 -R 0 -P 0 -Y 0" />
-  </include>
-  <include file="model_spawn.gazebo.launch">
-     <arg name="model_dbname" value="road_net_node_3"/>
-     <arg name="model_position" value="-x 20.6728 -y 1.3831 -z 0.0 -R 0 -P 0 -Y 0" />
-  </include>
-  <include file="model_spawn.gazebo.launch">
-     <arg name="model_dbname" value="road_net_node_4"/>
-     <arg name="model_position" value="-x 23.2187 -y 44.4008 -z 0.0 -R 0 -P 0 -Y 0" />
-  </include>
-  <include file="model_spawn.gazebo.launch">
-     <arg name="model_dbname" value="road_net_node_5"/>
-     <arg name="model_position" value="-x 27.6793 -y 19.4510 -z 0.0 -R 0 -P 0 -Y 0" />
-  </include>
-  <include file="model_spawn.gazebo.launch">
-     <arg name="model_dbname" value="road_net_node_6"/>
-     <arg name="model_position" value="-x 34.6627 -y 32.6882 -z 0.0 -R 0 -P 0 -Y 0" />
+     <arg name="model_dbname" value="road_net_node_empty"/>
+     <arg name="model_position" value="-x 34.4535 -y 29.3744 -z 0.1 -R 0 -P 0 -Y 0" />
   </include>
 
-  <include file="model_spawn.gazebo.launch">
-     <arg name="model_dbname" value="road_net_node_7"/>
-     <arg name="model_position" value="-x 37.3050 -y 51.1841 -z 0.0 -R 0 -P 0 -Y 0" />
+ <!-- <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="road_net_node_sensor"/>
+     <arg name="model_position" value="-x 45.7463 -y 37.9635 -z 0.0 -R 0 -P 0 -Y 0" />
   </include>
   <include file="model_spawn.gazebo.launch">
-     <arg name="model_dbname" value="road_net_node_8"/>
-     <arg name="model_position" value="-x 36.5764 -y 8.1558 -z 0.0 -R 0 -P 0 -Y 0" />
+     <arg name="model_dbname" value="road_net_node_sensor"/>
+     <arg name="model_position" value="-x 52.4764 -y 22.0 -z 0.0 -R 0 -P 0 -Y 0" />
   </include>
   <include file="model_spawn.gazebo.launch">
-     <arg name="model_dbname" value="road_net_node_9"/>
-     <arg name="model_position" value="-x 50.7050 -y 9.2940 -z 0.0 -R 0 -P 0 -Y 0" />
+     <arg name="model_dbname" value="road_net_node_sensor"/>
+     <arg name="model_position" value="-x 39.4766 -y 15.0362 -z 0.0 -R 0 -P 0 -Y 0" />
   </include>
   <include file="model_spawn.gazebo.launch">
-     <arg name="model_dbname" value="road_net_node_10"/>
-     <arg name="model_position" value="-x 45.4001 -y 22.6416 -z 0.0 -R 0 -P 0 -Y 0" />
+     <arg name="model_dbname" value="road_net_node_sensor"/>
+     <arg name="model_position" value="-x 48.2208 -y 5.1927 -z 0.0 -R 0 -P 0 -Y 0" />
   </include>
   <include file="model_spawn.gazebo.launch">
-     <arg name="model_dbname" value="road_net_node_11"/>
-     <arg name="model_position" value="-x 47.2805 -y 37.8777 -z 0.0 -R 0 -P 0 -Y 0" />
+     <arg name="model_dbname" value="road_net_node_empty"/> 
+     <arg name="model_position" value="-x 31.1596 -y 2.7756 -z 0.0 -R 0 -P 0 -Y 0" />
   </include>
-	-->
-
+  <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="road_net_node_sensor"/>
+     <arg name="model_position" value="-x 15.0934 -y 8.7257-z 0.0 -R 0 -P 0 -Y 0" />
+  </include>
+  <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="road_net_node_empty"/>
+     <arg name="model_position" value="-x 9.6406 -y 24.5925 -z 0.0 -R 0 -P 0 -Y 0" />
+  </include>
+  <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="road_net_node_sensor"/>
+     <arg name="model_position" value="-x 21.2949 -y 35.9467 -z 0.0 -R 0 -P 0 -Y 0" />
+  </include>
+  <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="road_net_node_sensor"/>
+     <arg name="model_position" value="-x 16.1490 -y 48.5783 -z 0.0 -R 0 -P 0 -Y 0" />
+  </include>
+  <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="road_net_node_sensor"/>
+     <arg name="model_position" value="-x 2.7914 -y 38.6330 -z 0.0 -R 0 -P 0 -Y 0" />
+  </include>
+  -->
 
   <!-- Running other launch files -->
-<!-- Matt says use two seperate <group ns="intruder or hero"/> instead of how this is now but will need to add the /map as a node on the bottom...I don't know how to do that-->
   <include file="../pioneer_nav/move_base_intruder.launch"/>
-
   <include file="../pioneer_nav/move_base.launch"/>
 
 

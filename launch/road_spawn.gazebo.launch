@@ -1,0 +1,10 @@
+<launch>
+  <arg name="road_net_dbname" default="road_net_node" />
+  <arg name="road_net_name" default="$(arg road_net_dbname)" />
+  <arg name="road_net_position" default="-x 27.65 -y 27.65 -z -0.01 -R 0 -P 0 -Y 0" />
+  <arg name="road_net_size" default="55.3 55.3 0.099" />
+
+    <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+    <node name="road_net_spawner_$(arg road_net_name)" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-sdf -database $(arg road_net_dbname) -model $(arg road_net_name) -link -visual -pose $(arg road_net_position) -visual -geometry -box -size $(arg road_net_size)"/>
+
+</launch>

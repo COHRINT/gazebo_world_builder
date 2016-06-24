@@ -1,0 +1,15 @@
+material imaginary_road
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture roadnet1.png
+        filtering anistropic
+        max_anisotropy 16
+      }
+    }
+  }
+}

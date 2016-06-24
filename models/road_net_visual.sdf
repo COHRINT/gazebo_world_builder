@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <model name="road_net_visual">
+    <static>true</static>
+    <link name="roads">
+      <visual name="map_entire_visual">
+        <!-- <pose>27.65 27.65 0 0 0 0</pose> -->
+        <pose>${road_net_position}</pose>
+        <geometry>
+          <box>
+            <!-- <size>55.3 55.3 0.099</size> -->
+            <size>${road_net_size}</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>${road_net_map_script}</uri>
+            <uri>${road_net_map}</uri>
+            <name>imaginary_road</name>
+          </script>
+      </material>
+<!--         <plugin name="display_video_controller" filename="libgazebo_ros_video.so">
+        <topicName>map</topicName>
+        <height>790</height>
+        <width>790</width>
+      </plugin> -->
+      </visual>
+    </link>
+  </model>
+</sdf>
