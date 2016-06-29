@@ -17,15 +17,17 @@ import rospy
 from std_msgs.msg import String
 
 def callback_sensor(data):
-	rospy.loginfo(rospy.get_caller_id() + "The intruder is at sensor node %s in position %s", data.node, data.position)
+	rospy.loginfo(rospy.get_caller_id() + "The intruder is at sensor node %s", data.node)
+
 def callback_exit(data):
 	rospy.loginfo(rospy.get_caller_id() + "The intruder has reached the exit node.  The simulation is over.")
 
 def listener():
 	rospy.iniy_node('listener', anonymous=True)
 	# Before calling callbacks make sure to check that you are not reposrting on the hero
-	rospy.Subscriber('SENSOR', String, callback_sensor)
-	rospy.Subscriber('EXIT', String, callback_exit)
+	# msg is definitly not a string
+	rospy.Subscriber('pressure_plate_sensor', String, callback_sensor)
+	rospy.Subscriber('pressure_plate_exit', String, callback_exit)
 	rospy.spin()
 
 def talker():
