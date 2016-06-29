@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+
+#Author: Sierra Williams
+#Date Created: 06/22/16
+#Date Modeified: 06/22/16
+
 import sys
 import shutil
 import os

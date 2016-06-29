@@ -1,15 +1,20 @@
 obstacle_range: 2.5
 raytrace_range: 3.0
-#footprint: [[-0.2505, -0.2], [-0.2505, 0.2], [0.2505, 0.2], [0.2505, -0.2]]
+#footprint: [[-0.55, -0.4], [-0.55, 0.4], [0.55, 0.4], [0.46, 0.0], [0.55, -0.4]]
 #footprint: [[6.2095, 1.32], [6.2095, 1.72], [6.7105, 1.72], [6.7105, 1.32]]
-robot_radius: .50
+
+
+footprint: [[-0.5, -0.33], [-0.5, 0.33], [0.5, 0.33], [0.5, -0.33]]
+footprint_padding: 0.5
+
+#robot_radius: .70
 
 #inflation_layer:
 #enabled: true
 #cost_scaling_factor: 5
-inflation_radius: 0.8
+inflation_radius: 0.3
 
-transform_tolerance: 5
+transform_tolerance: 2.0
 
 #observation_sources: #laser_scan_sensor #point_cloud_sensor
 
