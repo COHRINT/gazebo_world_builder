@@ -2,21 +2,30 @@
 
 #Author: Sierra Williams
 #Date Created: 06/22/16
-#Date Modeified: 06/30/16
+#Date Modeified: 07/06/16
 
 import sys
 import shutil
 import os
 import json
 
+# Things to change make node update rate, node number (Could be gross), mapModelSize a parameter in this script
 
-if len(sys.argv) > 2:
+# Instead if making nodes bigger make nodes white?
+
+if len(sys.argv) > 3:
 	picName = sys.argv[1]
 	nodeFileName = sys.argv[2]
+	nodePublishRate = sys.argv[3]
 
 else: 
 	picName = "roadnet1_blk.png"
 	nodeFileName = "roadnet1_blk.json"
+	nodePublishRate = "0.5"
+#Pixel multipled by resolution or need more white around map	
+mapy = 1000*0.15
+mapx = 1000*0.15
+mapModelSize = "-x %s -y %s"%(str(mapy), str(mapx))
 
 #Need to eventually make this pretty and clean and not calling my home directory
 shutil.copy("/home/sierra/p3catkinws/src/gazebo_world_builder/maps/%s"%(picName), "/home/sierra/.gazebo/models/road_net_visual/"\
@@ -30,7 +39,7 @@ os.rename(src, dest)
 with open('/home/sierra/p3catkinws/src/self_confidence/Road_Network_POMDPX/%s'%(nodeFileName)) as position_file:
 	nodeParameters = json.load(position_file)
 
-position = nodeParameters["positions"]
+position = nodeParameters["pixel_positions"]
 feature = nodeParameters["feature"]
 # Force nodes in order 
 numbermap = {'1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10, '11': 11, '12': 12, '13': 13}

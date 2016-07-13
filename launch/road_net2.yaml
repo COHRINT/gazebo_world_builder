@@ -1,4 +1,4 @@
-image: ../maps/roadnet2_rot180.pbm
+image: ../maps/roadnet2.pbm
 resolution: 0.15
 origin: [0.0, 0.0, 0.0]
 occupied_thresh: 0.5

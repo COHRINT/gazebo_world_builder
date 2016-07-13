@@ -5,7 +5,7 @@
       name="mapToOdomHero" args="0 0 0 0 0 0 /map /hero/odom 2"/>
   <!-- Transform Between Map and odom-->     
   <node pkg="tf" type="static_transform_publisher" 
-      name="mapToOdomIntruder" args="0 0 0 0 0 0 /map intruder/odom 2"/>
+      name="mapToOdomIntruder" args="0 0 0 0 0 0 /map /intruder/odom 2"/>
 
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched.  Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -22,12 +22,14 @@
      <arg name="maze_position" value="-x 0 -y 0 -z 0.01 -R 0 -P 0 -Y 0" />
   </include>-->
 
-  <node name="map_server" pkg="hri_map_server" type="map_server" args="$(find gazebo_world_builder)/launch/road_net2.yaml" />
+  <node name="map_server" pkg="hri_map_server" type="map_server" args="$(find gazebo_world_builder)/launch/road_net2.yaml">
+    <param name="frame_id" value="/map" />
+  </node>
 
   <!-- World without walls -->
   <include file="road_spawn.gazebo.launch">
     <arg name="road_net_dbname" value="road_net_visual"/>
-    <arg name="road_net_position" value="-x 59.25 -y 59.25 -z -0.01 -R 0 -P 0 -Y 0" />
+    <arg name="road_net_position" value="-x 75 -y 75 -z -0.01 -R 0 -P 0 -Y 0" />
     <arg name="road_net_size" value="79 79 0.099" />
   </include>
 
@@ -38,11 +40,11 @@
 
   <include file="model_spawn.gazebo.launch">
      <arg name="model_dbname" value="husky_good"/>
-     <arg name="model_position" value="$(arg node_2) -z 0.07 -R 0 -P 0 -Y -0.4084" />
+     <arg name="model_position" value="$(arg node_8) -z 0.08 -R 0 -P 0 -Y -0.4084" />
   </include>
   <include file="model_spawn.gazebo.launch">
      <arg name="model_dbname" value="husky_intruder"/>
-     <arg name="model_position" value="$(arg node_11) -z 0.07 -R 0 -P 0 -Y 0.6495" />
+     <arg name="model_position" value="$(arg node_12) -z 0.08 -R 0 -P 0 -Y 0.6495" />
   </include>
 
   <!-- Node/Sensors   -->     
@@ -112,11 +114,19 @@
      <arg name="model_position" value="$(arg node_5) -z 0.05 -R 0 -P 0 -Y 0" />
   </include>
 
-  <!-- Running other launch files -->
-  <include file="$(find gazebo_world_builder)/pioneer_nav/move_base_intruder.launch"/>
-  <include file="$(find gazebo_world_builder)/pioneer_nav/move_base.launch"/>
+  <!-- Running other launch files  -->
 
 
+  <!-- <include file="$(find gazebo_world_builder)/pioneer_nav/move_base_intruder.launch"/> -->
 
+  <group ns="intruder">
+    <param name="tf_prefix" value="intruder"/>
+    <include file="$(find gazebo_world_builder)/pioneer_nav/move_base.launch"/>
+  </group>
+
+  <group ns="hero">
+    <param name="tf_prefix" value="hero"/>
+    <include file="$(find gazebo_world_builder)/pioneer_nav/move_base.launch"/>
+  </group>
 
 </launch>
