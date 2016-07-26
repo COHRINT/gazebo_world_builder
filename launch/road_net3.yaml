@@ -1,8 +1,9 @@
-image: ../maps/road_net3.pbm
-resolution: 1
+image: ../maps/roadnet3_blk.pbm
+resolution: 0.15
 origin: [0.0, 0.0, 0.0]
-occupied_thresh: 2
-free_thresh: 2
+occupied_thresh: 0.5
+free_thresh: 0.5
 negate: 0
 mode: raw
+
 

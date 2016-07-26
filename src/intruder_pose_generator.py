@@ -14,40 +14,52 @@ import sys
 import rospy
 import logging
 import json
+import os
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import PoseStamped
 import random
+import rospkg
+import numpy
 
 def callback(data):
-	x = int(data.pose.pose.position.x)
-	y = int(data.pose.pose.position.y)
-	pose = '(%s, %s)'%(str(x), str(y))
-	Goal_intruder(pose)
+	x = float(data.pose.pose.position.x)
+	y = float(data.pose.pose.position.y)
+	Goal_intruder(x, y)
 
-def Goal_intruder(pose):
-	nodeFileName = "roadnet1_blk.json"
-	with open('/home/sierra/p3catkinws/src/self_confidence/Road_Network_POMDPX/%s'%(nodeFileName)) as position_file:
+def Goal_intruder(pose_x, pose_y):
+	if len(sys.argv) > 1:
+		nodeFileName = sys.argv[1]
+
+	else: 
+		nodeFileName = "roadnet1_blk.json"
+	# Get file paths
+	rospack = rospkg.RosPack()
+	package_path = rospack.get_path('gazebo_world_builder')
+	
+	with open('%s/models/node_info/%s'%(package_path, nodeFileName)) as position_file:
 		nodeParameters = json.load(position_file)
 	position = nodeParameters["pixel_positions"]
-	numbermap = {'1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10, '11': 11, '12': 12, '13': 13}
-	keys = sorted(position.keys(), key=numbermap.__getitem__)
-	pos = {}
-	i=0
-	for key in keys:
-		pos[i] = position[key]
+	new_pos = {}
+	i = 0
+	for key, value in position.iteritems():
+		new_pos[int(position.keys()[i])] = position.values()[i]
 		i += 1
-	node_pose = []
 	goal_pose = []
+	x = []
+	y = []
 	i=0
-	for key, value in pos.iteritems():
-		node_pose.insert(i, (int(value[0]*.15), int(value[1]*.15)))
+	for key, value in new_pos.iteritems():
 		goal_pose.insert(i, (value[0]*.15, value[1]*.15))
+		x.insert(i, (value[0]*.15))
+		y.insert(i, (value[1]*.15))
 		i += 1
 
-	for i in range(0, len(node_pose)):
-		# Need to make less exact 
-		if (pose == str(node_pose[i])):
-			Goal = str(goal_pose[random.randint(0, 12)])
+	for i in range(0, len(goal_pose)):
+		dist_x = pose_x-x[i]
+		dist_y = pose_y-y[i]
+		dist = numpy.sqrt(pow(dist_x, 2)+pow(dist_y, 2))
+		if (dist <= 1.2):
+			Goal = str(goal_pose[random.randint(0, len(goal_pose)-1)])
 			talker_intruder(Goal)
 
 def listener():

@@ -1,30 +1,111 @@
-
 <launch>
 
   <!-- Transform Between Map and odom-->     
   <node pkg="tf" type="static_transform_publisher" 
-      name="mapToOdom" args="0 0 0 0 0 0 /map /odom 2"/>
+      name="mapToOdomHero" args="0 0 0 0 0 0 /map /hero/odom 2"/>
+  <!-- Transform Between Map and odom-->     
+  <node pkg="tf" type="static_transform_publisher" 
+      name="mapToOdomIntruder" args="0 0 0 0 0 0 /map /intruder/odom 2"/>
 
-  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched.  Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <!-- Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable -->
     <arg name="paused" value="false"/>
     <arg name="use_sim_time" value="true"/>
     <arg name="gui" value="true"/>
     <arg name="headless" value="false"/>
     <arg name="debug" value="false"/>
   </include>
- <include file="maze_spawn.gazebo.launch">
-     <arg name="maze_name" value="road_net3"/>
-     <arg name="maze_position" value="-x 0 -y 0 -z 0.01 -R 0 -P 0 -Y 0" />
-  </include >
 
-<node name="map_server" pkg="hri_map_server" type="map_server" args="$(find gazebo_world_builder)/launch/road_net3.yaml" />
+  <node name="map_server" pkg="hri_map_server" type="map_server" args="$(find gazebo_world_builder)/launch/road_net3.yaml">
+    <param name="frame_id" value="/map" />
+  </node>
 
-<!--<include file="$(find basic_move_base)/launch/basic_move.launch"/>-->
-  <include file="model_spawn.gazebo.launch">
-     <arg name="model_dbname" value="pioneer3at" />
-     <arg name="model_position" value="-x 1.99 -y 10.99 -z 0.17 -R 0 -P 0 -Y 0" />
+  <!-- World without walls -->
+  <include file="road_spawn.gazebo.launch">
+    <arg name="road_net_dbname" value="road_net_visual"/>
+    <arg name="road_net_position" value="-x 75 -y 75 -z -0.01 -R 0 -P 0 -Y 0" />
+    <arg name="road_net_size" value="79 79 0.099" />
   </include>
+
+
+  <!-- Spawn models   -->
+
+  <!-- The current size of the nodes are 1.0 and thr roads are a pinwidith of 25 with the origin in the top left corner -->
+
+  <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="husky_good"/>
+     <arg name="model_position" value="$(arg node_8) -z 0.08 -R 0 -P 0 -Y -0.4084" />
+  </include>
+  <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="husky_intruder"/>
+     <arg name="model_position" value="$(arg node_10) -z 0.08 -R 0 -P 0 -Y 0.6495" />
+  </include>
+
+  <!-- Node/Sensors   -->     
+  <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="road_net_node_$(arg node_type_8)"/>
+     <arg name="model_name" value="node_8"/>
+     <arg name="model_position" value="$(arg node_8) -z 0.05 -R 0 -P 0 -Y 0" />
+  </include>
+  <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="road_net_node_$(arg node_type_10)"/>
+     <arg name="model_name" value="node_10"/>
+     <arg name="model_position" value="$(arg node_10) -z 0.05 -R 0 -P 0 -Y 0" />
+  </include>
+  <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="road_net_node_$(arg node_type_9)"/>
+     <arg name="model_name" value="node_9"/>
+     <arg name="model_position" value="$(arg node_9) -z 0.05 -R 0 -P 0 -Y 0" />
+  </include>
+  <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="road_net_node_$(arg node_type_1)"/>
+     <arg name="model_name" value="node_1"/>
+     <arg name="model_position" value="$(arg node_1) -z 0.05 -R 0 -P 0 -Y 0" />
+  </include>
+  <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="road_net_node_$(arg node_type_3)"/>
+     <arg name="model_name" value="node_3"/>
+     <arg name="model_position" value="$(arg node_3) -z 0.05 -R 0 -P 0 -Y 0" />
+  </include>
+  <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="road_net_node_$(arg node_type_2)"/> 
+     <arg name="model_name" value="node_2"/>
+     <arg name="model_position" value="$(arg node_2) -z 0.05 -R 0 -P 0 -Y 0" />
+  </include>
+  <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="road_net_node_$(arg node_type_4)"/>
+     <arg name="model_name" value="node_4"/>
+     <arg name="model_position" value="$(arg node_4) -z 0.05 -R 0 -P 0 -Y 0" />
+  </include>
+  <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="road_net_node_$(arg node_type_7)"/>
+     <arg name="model_name" value="node_7"/>
+     <arg name="model_position" value="$(arg node_7) -z 0.05 -R 0 -P 0 -Y 0" />
+  </include>
+  <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="road_net_node_$(arg node_type_6)"/>
+     <arg name="model_name" value="node_6"/>
+     <arg name="model_position" value="$(arg node_6) -z 0.05 -R 0 -P 0 -Y 0" />
+  </include>
+  <include file="model_spawn.gazebo.launch">
+     <arg name="model_dbname" value="road_net_node_$(arg node_type_5)"/>
+     <arg name="model_name" value="node_5"/>
+     <arg name="model_position" value="$(arg node_5) -z 0.05 -R 0 -P 0 -Y 0" />
+  </include>
+
+  <!-- Running other launch files  -->
+
+
+  <!-- <include file="$(find gazebo_world_builder)/pioneer_nav/move_base_intruder.launch"/> -->
+
+  <group ns="intruder">
+    <param name="tf_prefix" value="intruder"/>
+    <include file="$(find gazebo_world_builder)/pioneer_nav/move_base.launch"/>
+  </group>
+
+  <group ns="hero">
+    <param name="tf_prefix" value="hero"/>
+    <include file="$(find gazebo_world_builder)/pioneer_nav/move_base.launch"/>
+  </group>
 
 </launch>

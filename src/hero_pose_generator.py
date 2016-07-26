@@ -14,29 +14,35 @@ import sys
 import rospy
 import logging
 import json
+import os
 from std_msgs.msg import String
 from geometry_msgs.msg import PoseStamped
-import random
-
+import rospkg
 
 def callback(data):
+	if len(sys.argv) > 1:
+		nodeFileName = sys.argv[1]
+
+	else: 
+		nodeFileName = "roadnet1_blk.json"
+	# Get file paths
+	rospack = rospkg.RosPack()
+	package_path = rospack.get_path('gazebo_world_builder')
+
 	data = str(data)
 	nodeNumber = data.split('_')[1]
 	# Grab JSON node positions
-	nodeFileName = "roadnet1_blk.json"
-	with open('/home/sierra/p3catkinws/src/self_confidence/Road_Network_POMDPX/%s'%(nodeFileName)) as position_file:
+	with open('%s/models/node_info/%s'%(package_path, nodeFileName)) as position_file:
 		nodeParameters = json.load(position_file)
 	position = nodeParameters["pixel_positions"]
-	numbermap = {'1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10, '11': 11, '12': 12, '13': 13}
-	keys = sorted(position.keys(), key=numbermap.__getitem__)
-	pos = {}
-	i=0
-	for key in keys:
-		pos[i] = position[key]
-		i += 1
+	new_pos = {}
+	i = 0
+	for key, value in position.iteritems():
+		new_pos[int(position.keys()[i])] = position.values()[i]
+		i += 1	
 	node_pose = []
 	i=0
-	for key, value in pos.iteritems():
+	for key, value in new_pos.iteritems():
 		node_pose.insert(i, ((value[0]*.15), (value[1]*.15)))
 		i += 1
 
