@@ -73,7 +73,7 @@ def talker_intruder(msgIntuder):
 	pubIntruder = rospy.Publisher('/intruder/move_base_simple/goal', PoseStamped, queue_size=10)
 	rospy.Rate = 2.0
 	move_base_goal_intruder = PoseStamped()
-	rospy.loginfo("Goal Pose for Intruder: (%s, %s)"%(x_goal_intruder, y_goal_intruder))
+	# rospy.loginfo("Goal Pose for Intruder: (%s, %s)"%(x_goal_intruder, y_goal_intruder))
 	move_base_goal_intruder.pose.position.x = float(x_goal_intruder)
 	move_base_goal_intruder.pose.position.y = float(y_goal_intruder)
 	move_base_goal_intruder.pose.orientation.x = 0.0

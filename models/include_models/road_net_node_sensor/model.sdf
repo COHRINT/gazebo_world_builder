@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <model name="road_net_node_sensor">
+    <static>true</static>
+    <link name="road_node_sensor">
+      <collision name="node_entire_collision">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <!-- Must be 5.4 for dev branch -->
+            <radius>8.1</radius>
+            <length>0.01</length>
+          </cylinder>
+        </geometry>
+      </collision> 
+      <visual name="node_entire_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>8.1</radius>
+            <length>0.01</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://road_net_node_sensor/materials/scripts</uri>
+            <uri>model://road_net_node_sensor/materials/textures</uri>
+            <name>imaginary</name>
+          </script>
+        </material>
+      </visual>
+      <sensor name="contact_sensor" type="contact">
+        <always_on>true</always_on>
+        <update_rate>.2</update_rate>
+        <contact>
+          <collision>node_entire_collision</collision>
+        </contact>
+        <plugin name="node_gazebo_ros_bumper_controller" filename="libgazebo_ros_bumper.so">
+          <alwaysOn>true</alwaysOn>
+          <updateRate>.2</updateRate>
+          <bumperTopicName>pressure_plate_sensor</bumperTopicName>
+          <frameName>nodeSensor</frameName>
+        </plugin>
+      </sensor>
+    </link>
+  </model>
+</sdf>

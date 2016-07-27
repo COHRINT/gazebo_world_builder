@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <model name="road_net_node_none">
+    <static>true</static>
+    <link name="road_node_none">
+      <collision name="node_entire_collision">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>8.1</radius>
+            <length>0.01</length>
+          </cylinder>
+        </geometry>
+      </collision> 
+      <visual name="node_entire_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>8.1</radius>
+            <length>0.01</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://road_net_node_none/materials/scripts</uri>
+            <uri>model://road_net_node_none/materials/textures</uri>
+            <name>imaginary_2</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

@@ -1,0 +1,15 @@
+material imaginary_3
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture green.png
+        filtering anistropic
+        max_anisotropy 16
+      }
+    }
+  }
+}

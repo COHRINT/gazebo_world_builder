@@ -13,7 +13,9 @@
 ## A possible issue is if both intruder and hero are on the smae node ##
 
 import sys
+import os
 import rospy
+import rospkg
 import logging
 from std_msgs.msg import String
 from gazebo_msgs.msg import ContactsState
@@ -25,17 +27,21 @@ def callback_sensor(data):
 		nodeNumber = msg.collision2_name.split(':')[0]
 		if subject == "husky_intruder":
 			pub_msg = nodeNumber
-			rospy.loginfo(rospy.get_caller_id() + " The intruder is at %s"%(nodeNumber))
+			# rospy.loginfo(rospy.get_caller_id() + " The intruder is at %s"%(nodeNumber))
 			talker(pub_msg)
 
 def callback_exit(data):
 	if len(data.states) > 0:
 		msg = data.states[1]
 		subject = msg.collision1_name.split(':')[0]
-		if subject == "huskey_intruder":
+		if subject == "husky_intruder":
+			print('exit')
 			rospy.loginfo(rospy.get_caller_id() + "The intruder has reached the exit node.  The simulation is over.")
-			#kill simulation
-			sys.exit()
+			#Stop simulation
+			rospack = rospkg.RosPack()
+			package_path = rospack.get_path('gazebo_world_builder')
+			os.system("python %s/src/stop_sim.py" %(package_path))
+			os.system("python stop_sim.py")
 
 def listener():
 	rospy.init_node('listener', anonymous=True)
@@ -46,7 +52,7 @@ def listener():
      
 def talker(msg):
 	pub = rospy.Publisher('/tripped_pressure_sensor', String, queue_size=10)
-	rospy.loginfo(msg)
+	# rospy.loginfo(msg)
 	pub.publish(msg)
 
 if __name__ == '__main__' :

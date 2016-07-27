@@ -16,4 +16,6 @@ python ../src/hero_pose_generator.py roadnet3_blk.json &
 sleep 15
 
 # 1 Argument can go here (nodeFileName)
-python ../src/intruder_pose_generator.py roadnet3_blk.json
+python ../src/intruder_pose_generator.py roadnet3_blk.json &
+
+python ../src/intruderCaught.py

@@ -14,4 +14,6 @@ python ../src/hero_pose_generator.py roadnet1_blk.json &
 
 sleep 15
 
-python ../src/intruder_pose_generator.py roadnet1_blk.json
+python ../src/intruder_pose_generator.py roadnet1_blk.json  &
+
+python ../src/intruderCaught.py

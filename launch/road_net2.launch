@@ -8,7 +8,7 @@
       name="mapToOdomIntruder" args="0 0 0 0 0 0 /map /intruder/odom 2"/>
 
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched.  Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable -->
-  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+  <include file="$(find gazebo_ros)/launch/fast_empty_world.launch">
     <arg name="paused" value="false"/>
     <arg name="use_sim_time" value="true"/>
     <arg name="gui" value="true"/>

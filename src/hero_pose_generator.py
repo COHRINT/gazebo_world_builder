@@ -61,7 +61,7 @@ def talker_hero(msgHero):
 	y_goal = msgHero.split(',')[1].split(')')[0]
 	move_base_goal = PoseStamped()
 	pubHero = rospy.Publisher('/hero/move_base_simple/goal', PoseStamped, queue_size=10)
-	rospy.loginfo("Goal Pose: (%s, %s)"%(x_goal, y_goal))
+	# rospy.loginfo("Goal Pose: (%s, %s)"%(x_goal, y_goal))
 	move_base_goal.pose.position.x = float(x_goal)
 	move_base_goal.pose.position.y = float(y_goal)
 	move_base_goal.pose.orientation.x = 0.0
