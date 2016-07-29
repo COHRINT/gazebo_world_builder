@@ -85,5 +85,5 @@ node_type_string = s.join(node_type)
 
 
 # Launch ROS
-os.system("roslaunch /home/sierra/p3catkinws/src/gazebo_world_builder/launch/%s %s %s" %(launch_file, node_string, node_type_string))
+os.system("roslaunch /home/sierra/p3catkinws/src/gazebo_world_builder/launch/%s %s %s node_publish_rate:=%s" %(launch_file, node_string, node_type_string, nodePublishRate))
 

@@ -35,13 +35,10 @@ def callback_exit(data):
 		msg = data.states[1]
 		subject = msg.collision1_name.split(':')[0]
 		if subject == "husky_intruder":
-			print('exit')
 			rospy.loginfo(rospy.get_caller_id() + "The intruder has reached the exit node.  The simulation is over.")
-			#Stop simulation
 			rospack = rospkg.RosPack()
 			package_path = rospack.get_path('gazebo_world_builder')
 			os.system("python %s/src/stop_sim.py" %(package_path))
-			os.system("python stop_sim.py")
 
 def listener():
 	rospy.init_node('listener', anonymous=True)

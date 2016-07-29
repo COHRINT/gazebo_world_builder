@@ -13,7 +13,7 @@ python ../src/roadnet_sensor.py &
 # 1 Argument can go here (nodeFileName)
 python ../src/hero_pose_generator.py roadnet3_blk.json &
 
-sleep 15
+sleep 8
 
 # 1 Argument can go here (nodeFileName)
 python ../src/intruder_pose_generator.py roadnet3_blk.json &

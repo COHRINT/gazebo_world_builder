@@ -26,7 +26,7 @@ class Robot(object):
 			dist_x = self.x_pose-other.x_pose
 			dist_y = self.y_pose-other.y_pose
 			dist = numpy.sqrt(pow(dist_x, 2)+pow(dist_y, 2))
-			if (dist <= 2.5):
+			if (dist <= 4.0):
 				rospy.loginfo("The simulation is over the hero has caught the intruder")
 				rospack = rospkg.RosPack()
 				package_path = rospack.get_path('gazebo_world_builder')

@@ -12,7 +12,7 @@ python ../src/roadnet_sensor.py &
 
 python ../src/hero_pose_generator.py roadnet1_blk.json &
 
-sleep 15
+sleep 10
 
 python ../src/intruder_pose_generator.py roadnet1_blk.json  &
 
